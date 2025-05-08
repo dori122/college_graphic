@@ -67,12 +67,20 @@ public class Results extends JFrame {
 		
 		textField = new JTextField();
 		textField.setColumns(10);
+		textField.setEditable(false);
+
+
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
 		
+
+
+		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
+		
+
 		
 		JLabel lblNewLabel_3 = new JLabel("Results");
 		lblNewLabel_3.setForeground(Color.RED);
@@ -143,8 +151,8 @@ public class Results extends JFrame {
 									.addGap(20)
 									.addComponent(Rightarrow, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)
 									.addGap(20)
-									.addComponent(FullRightarrow)))))
-					.addGap(141))
+									.addComponent(FullRightarrow, GroupLayout.PREFERRED_SIZE, 42, GroupLayout.PREFERRED_SIZE)))))
+					.addGap(153))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -166,14 +174,16 @@ public class Results extends JFrame {
 						.addComponent(lblNewLabel_2))
 					.addGap(26)
 					.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
-						.addComponent(Backarrow, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
-						.addComponent(Leftarrow, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
-						.addComponent(Rightarrow, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.LEADING)
+								.addComponent(Backarrow, GroupLayout.PREFERRED_SIZE, 29, GroupLayout.PREFERRED_SIZE)
+								.addComponent(Leftarrow, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
+								.addComponent(Rightarrow, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
+							.addGap(32)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
+								.addComponent(Update)
+								.addComponent(Delete)))
 						.addComponent(FullRightarrow, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE))
-					.addGap(32)
-					.addGroup(gl_contentPane.createParallelGroup(Alignment.BASELINE)
-						.addComponent(Update)
-						.addComponent(Delete))
 					.addGap(76))
 		);
 		contentPane.setLayout(gl_contentPane);

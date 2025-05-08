@@ -18,6 +18,8 @@ import java.awt.event.ActionEvent;
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
 
+
+
 public class MainMenu extends JFrame {
 
 	private static final long serialVersionUID = 1L;
@@ -54,12 +56,20 @@ public class MainMenu extends JFrame {
 		JButton Teachers = new JButton("Teachers");
 		Teachers.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				new Search_Insert().setVisible(true);
+			    dispose();
 			}
 		});
 		Teachers.setForeground(Color.BLACK);
 		Teachers.setBackground(Color.RED);
 		
 		JButton Version = new JButton("Version");
+		Version.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new Version().setVisible(true);
+			    dispose();
+			}
+		});
 		Version.setForeground(Color.BLACK);
 		Version.setBackground(Color.RED);
 		

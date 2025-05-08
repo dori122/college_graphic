@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JTextField;
@@ -13,6 +14,12 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 import java.awt.Color;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.DocumentFilter;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
 
 public class New_Member extends JFrame {
 
@@ -56,12 +63,51 @@ public class New_Member extends JFrame {
 		
 		textField = new JTextField();
 		textField.setColumns(10);
+		((AbstractDocument) textField.getDocument()).setDocumentFilter(new DocumentFilter() {
+		    @Override
+		    public void insertString(FilterBypass fb, int offs, String str, AttributeSet a)
+		            throws BadLocationException {
+		        if (str.matches("\\d+")) {
+		            super.insertString(fb, offs, str, a);
+		        }
+		        // else ignore non-digits
+		    }
+		    @Override
+		    public void replace(FilterBypass fb, int offs, int len, String text, AttributeSet attrs)
+		            throws BadLocationException {
+		        if (text.matches("\\d+")) {
+		            super.replace(fb, offs, len, text, attrs);
+		        }
+		    }
+		});
+
 		
 		textField_1 = new JTextField();
 		textField_1.setColumns(10);
 		
 		textField_2 = new JTextField();
 		textField_2.setColumns(10);
+		DocumentFilter nameFilter = new DocumentFilter() {
+		    private final String regex = "[\\p{L} ]+";  // any unicode letter or space
+		    @Override
+		    public void insertString(FilterBypass fb, int offs, String str, AttributeSet a)
+		        throws BadLocationException {
+		        if (str.matches(regex)) {
+		            super.insertString(fb, offs, str, a);
+		        }
+		    }
+		    @Override
+		    public void replace(FilterBypass fb, int offs, int len, String text, AttributeSet attrs)
+		        throws BadLocationException {
+		        if (text.matches(regex)) {
+		            super.replace(fb, offs, len, text, attrs);
+		        }
+		    }
+		};
+
+		
+		((AbstractDocument)textField_1.getDocument()).setDocumentFilter(nameFilter);
+		((AbstractDocument)textField_2.getDocument()).setDocumentFilter(nameFilter);
 		
 		JLabel id = new JLabel("ID:");
 		id.setForeground(Color.RED);
@@ -76,6 +122,42 @@ public class New_Member extends JFrame {
 		lastname.setFont(new Font("Tahoma", Font.PLAIN, 13));
 		
 		JButton insert = new JButton("Register");
+		insert.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String name = textField_1.getText().trim();
+	            if (name.isEmpty()) {
+	                JOptionPane.showMessageDialog(
+	                    New_Member.this,
+	                    "name cannot be empty",
+	                    "Validation Error",
+	                    JOptionPane.WARNING_MESSAGE
+	                );
+	                textField_1.requestFocusInWindow();
+	                return;
+	            }
+	            //  Validate Lastname 
+	            String lastname = textField_2.getText().trim();
+	            if (lastname.isEmpty()) {
+	                JOptionPane.showMessageDialog(
+	                    New_Member.this,
+	                    "lastname cannot be empty",
+	                    "Validation Error",
+	                    JOptionPane.WARNING_MESSAGE
+	                );
+	                textField_2.requestFocusInWindow();
+	                return;
+	            }
+	            JOptionPane.showMessageDialog(
+	                    New_Member.this,
+	                    "Επιτυχής εγγραφή!",
+	                    "Success",
+	                    JOptionPane.INFORMATION_MESSAGE
+	                );
+	                textField.setText("");     
+	                textField_1.setText("");    // clear Name
+	                textField_2.setText("");
+			}
+		});
 		insert.setBackground(Color.RED);
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(

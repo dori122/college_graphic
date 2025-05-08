@@ -14,8 +14,11 @@ import java.awt.Color;
 import javax.swing.JTextArea;
 import javax.swing.JTextPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Search_Insert extends JFrame {
 
@@ -57,9 +60,32 @@ public class Search_Insert extends JFrame {
 		Title.setFont(new Font("Tahoma", Font.PLAIN, 16));
 		
 		JButton Insertbtn = new JButton("Register");
+		Insertbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new New_Member().setVisible(true);
+			    dispose();
+			}
+		});
 		Insertbtn.setBackground(Color.RED);
 		
 		JButton Searchbtn = new JButton("Search");
+		Searchbtn.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				String lname = textField.getText().trim();
+		        if (lname.isEmpty()) {
+		            JOptionPane.showMessageDialog(
+		                Search_Insert.this,
+		                "Please fill the lastname",
+		                "Validation Error",
+		                JOptionPane.WARNING_MESSAGE
+		            );
+		            textField.requestFocusInWindow();
+		            return;
+		        }
+				new Results().setVisible(true);
+			    dispose();
+			}
+		});
 		Searchbtn.setBackground(Color.RED);
 		
 		textField = new JTextField();

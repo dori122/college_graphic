@@ -13,6 +13,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Color;
 import javax.swing.SwingConstants;
 import java.awt.Font;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class Version extends JFrame {
 
@@ -54,6 +56,12 @@ public class Version extends JFrame {
 		lblNewLabel.setBackground(Color.RED);
 		
 		JButton btnNewButton = new JButton("Main menu");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				new MainMenu().setVisible(true);
+			    dispose();
+			}
+		});
 		btnNewButton.setBackground(Color.RED);
 		
 		JLabel lblNewLabel_1 = new JLabel("Version");
